@@ -1,0 +1,3 @@
+# txt generated with 'ffmpeg --help >> ffmpeg.txt; ffmpeg --help >> ffprobe.txt'
+**/ffmpeg.txt
+**/ffprobe.txt
