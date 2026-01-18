@@ -1,0 +1,31 @@
+{
+  "name": "Media Streaming - FFmpeg Devcontainer",
+  "workspaceFolder": "/workspace",
+  "build": {
+    "context": "..",
+    "dockerfile": "Dockerfile"
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind"
+  ],
+  "remoteUser": "dev",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "yzhang.markdown-all-in-one",
+        "streetsidesoftware.code-spell-checker"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "editor.formatOnSave": true,
+        "files.autoSave": "onFocusChange",
+        "markdown.preview.breaks": true
+      }
+    }
+  },
+  "postCreateCommand": "ffmpeg -version && ffprobe -version",
+  "features": {
+  }
+}
