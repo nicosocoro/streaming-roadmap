@@ -1,3 +1,13 @@
+# Development
+
+1. To execute commands in every step, it is considered you are working on `./roadmap/step_N`.
+If you are stand in another path, copy-pasted commands may not work.
+
+2. Generated files in every step are ignored by git.
+
+3. Well-known `BigBuckBunny` sample video is used for experiments. Go to /assets and run `sh ./initialize.sh`.
+
+4. List existing aliases for command line with `alias`.
 
 # Media Streaming Engineer – Practical, Balanced Roadmap
 
