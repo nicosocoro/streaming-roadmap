@@ -1,3 +1,9 @@
 # txt generated with 'ffmpeg --help >> ffmpeg.txt; ffmpeg --help >> ffprobe.txt'
 **/ffmpeg.txt
 **/ffprobe.txt
+
+# files generated for roadmap
+*.mp4
+
+# Others
+**/.DS_Store
