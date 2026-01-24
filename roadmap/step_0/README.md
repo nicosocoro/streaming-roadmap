@@ -96,7 +96,7 @@ There are no wrong answers at this stage.
 Pick **one** input file and run:
 
 ```bash
-ffmpeg -i inputs/input.mp4 -c copy inputs/remuxed.mp4
+ffmpeg -i ../../assets/<file>.mp4 -c copy inputs/<file>_remuxed.mp4
 ```
 
 Now compare:
