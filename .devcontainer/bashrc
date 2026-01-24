@@ -1,0 +1,2 @@
+alias ff="ffmpeg -hide_banner"
+alias fp="ffprobe -hide_banner"

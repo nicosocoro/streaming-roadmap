@@ -1,34 +1,49 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:22.04
 
-# Avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install system dependencies
+# -----------------------------
+# System packages
+# -----------------------------
 RUN apt-get update && apt-get install -y \
     ffmpeg \
     curl \
     git \
     ca-certificates \
     vim \
+    wget \
     less \
     iputils-ping \
+    sudo \
     && rm -rf /var/lib/apt/lists/*
 
-# Create a non-root user (recommended for devcontainers)
+# -----------------------------
+# Create non-root dev user
+# -----------------------------
 ARG USERNAME=dev
 ARG USER_UID=1000
 ARG USER_GID=1000
 
-RUN groupadd --gid $USER_GID $USERNAME \
-    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update \
-    && apt-get install -y sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME
+RUN groupadd --gid ${USER_GID} ${USERNAME} \
+    && useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} \
+    && echo "${USERNAME} ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME} \
+    && chmod 0440 /etc/sudoers.d/${USERNAME} \
+    && chown -R ${USERNAME}:${USERNAME} /home/${USERNAME}
 
-USER $USERNAME
+# -----------------------------
+# Bash configuration
+# -----------------------------
+COPY .devcontainer/bashrc /tmp/bashrc.append
+
+RUN cat /tmp/bashrc.append >> /home/dev/.bashrc \
+    && chown dev:dev /home/dev/.bashrc \
+    && rm /tmp/bashrc.append
+
+
+# -----------------------------
+# Runtime
+# -----------------------------
+USER ${USERNAME}
 WORKDIR /workspace
-
-# Default command
-CMD ["bash"]
+SHELL ["/bin/bash", "-c"]
